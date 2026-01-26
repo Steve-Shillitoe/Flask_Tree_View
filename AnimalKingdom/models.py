@@ -1,6 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
+from AnimalKingdom import db  # Importing db from the main app, see __init__.py for context
 
-db = SQLAlchemy()
+print("Models imported")
 
 class HierarchyNode(db.Model):
     __tablename__ = "HierarchyNode"
