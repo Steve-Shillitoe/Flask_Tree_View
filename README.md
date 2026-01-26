@@ -70,3 +70,23 @@ Downgrade to the previous revision:
 flask db downgrade
 
 ⚠️ Only do this carefully, especially in production. Data in dropped columns/tables will be lost.
+
+```
+Animals
+├── Mammals
+│   ├── Primates
+│   ├── Canines
+│   ├── Felines
+│   └── Mustelids
+│       ├── Polecat
+│       ├── Ferret
+│       ├── Badger
+│       ├── Otter
+│       ├── Stoat
+│       └── Weasel
+├── Reptiles
+├── Insects
+└── Amphibians
+
+```
+
