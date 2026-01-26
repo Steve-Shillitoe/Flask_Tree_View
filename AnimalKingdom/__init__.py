@@ -13,6 +13,8 @@ def create_app():
     migrate.init_app(app, db)
 
     from AnimalKingdom import models
+    from AnimalKingdom.routes import bp
+    app.register_blueprint(bp)
 
     return app
 
