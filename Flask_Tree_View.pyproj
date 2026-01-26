@@ -44,6 +44,7 @@
     <Compile Include="run.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AnimalKingdom\static\css\site.css" />
     <Content Include="AnimalKingdom\static\images\canines\fox.jpg" />
     <Content Include="AnimalKingdom\static\images\felines\cat.jpg" />
     <Content Include="AnimalKingdom\static\images\mustelids\ferret.jpg" />
@@ -77,6 +78,7 @@
     <Folder Include="AnimalKingdom\static\images\canines\" />
     <Folder Include="AnimalKingdom\static\images\felines\" />
     <Folder Include="AnimalKingdom\static\images\mustelids\" />
+    <Folder Include="AnimalKingdom\static\css\" />
     <Folder Include="AnimalKingdom\templates\" />
     <Folder Include="migrations\" />
     <Folder Include="migrations\versions\" />
