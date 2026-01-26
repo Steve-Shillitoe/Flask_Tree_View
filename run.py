@@ -1,25 +1,29 @@
 """
-This script runs the application using a development server.
-It contains the definition of routes and views for the application.
+Development entry point for the Flask app.
+
+- Works in Visual Studio 2026 and CLI
+- Uses the create_app() factory from AnimalKingdom
+- Compatible with Flask-Migrate
+- Exposes wsgi_app for IIS / production servers
 """
 
-from flask import Flask
-app = Flask(__name__)
+import os
+from AnimalKingdom import create_app
 
-# Make the WSGI interface available at the top level so wfastcgi can get it.
+# Create Flask app from factory
+app = create_app()
+
+# Expose WSGI app for IIS / wfastcgi if needed
 wsgi_app = app.wsgi_app
 
-
-@app.route('/')
-def hello():
-    """Renders a sample page."""
-    return "Hello World!"
-
-if __name__ == '__main__':
-    import os
-    HOST = os.environ.get('SERVER_HOST', 'localhost')
+# Run development server
+if __name__ == "__main__":
+    # Get host and port from Visual Studio environment variables if set
+    HOST = os.environ.get("SERVER_HOST", "127.0.0.1")
     try:
-        PORT = int(os.environ.get('SERVER_PORT', '5555'))
+        PORT = int(os.environ.get("SERVER_PORT", 5000))
     except ValueError:
-        PORT = 5555
-    app.run(HOST, PORT)
+        PORT = 5000
+
+    # Enable debug mode for auto-reload and nicer errors
+    app.run(host=HOST, port=PORT, debug=True)
