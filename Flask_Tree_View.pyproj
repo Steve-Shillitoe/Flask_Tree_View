@@ -27,9 +27,22 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="config.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AnimalKingdom\models.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AnimalKingdom\routes.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AnimalKingdom\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AnimalKingdom\static\images\polecat.jpg" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +55,13 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X64</Architecture>
     </Interpreter>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AnimalKingdom\" />
+    <Folder Include="AnimalKingdom\services\" />
+    <Folder Include="AnimalKingdom\static\" />
+    <Folder Include="AnimalKingdom\static\images\" />
+    <Folder Include="AnimalKingdom\templates\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
