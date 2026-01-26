@@ -6,7 +6,7 @@
     <ProjectGuid>0b15e878-23e3-4bae-b8fe-83710f3304df</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
-    <StartupFile>app.py</StartupFile>
+    <StartupFile>run.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -39,11 +39,24 @@
     <Compile Include="AnimalKingdom\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="app.py" />
+    <Compile Include="migrations\env.py" />
+    <Compile Include="migrations\versions\5db0fcecc632_initial_schema.py" />
+    <Compile Include="run.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AnimalKingdom\static\images\polecat.jpg" />
+    <Content Include="AnimalKingdom\static\images\canines\fox.jpg" />
+    <Content Include="AnimalKingdom\static\images\felines\cat.jpg" />
+    <Content Include="AnimalKingdom\static\images\mustelids\ferret.jpg" />
+    <Content Include="AnimalKingdom\static\images\mustelids\polecat.jpg" />
+    <Content Include="AnimalKingdom\templates\tree.html" />
+    <Content Include="migrations\alembic.ini" />
+    <Content Include="migrations\README" />
+    <Content Include="migrations\script.py.mako" />
+    <Content Include="migrations\versions\__pycache__\5db0fcecc632_initial_schema.cpython-314.pyc" />
+    <Content Include="migrations\__pycache__\env.cpython-314.pyc" />
+    <Content Include="README.md" />
     <Content Include="requirements.txt" />
+    <Content Include="SQL_Scripts\populate_db.sql" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="venv\">
@@ -61,7 +74,15 @@
     <Folder Include="AnimalKingdom\services\" />
     <Folder Include="AnimalKingdom\static\" />
     <Folder Include="AnimalKingdom\static\images\" />
+    <Folder Include="AnimalKingdom\static\images\canines\" />
+    <Folder Include="AnimalKingdom\static\images\felines\" />
+    <Folder Include="AnimalKingdom\static\images\mustelids\" />
     <Folder Include="AnimalKingdom\templates\" />
+    <Folder Include="migrations\" />
+    <Folder Include="migrations\versions\" />
+    <Folder Include="migrations\versions\__pycache__\" />
+    <Folder Include="migrations\__pycache__\" />
+    <Folder Include="SQL_Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
