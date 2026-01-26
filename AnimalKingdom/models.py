@@ -21,3 +21,18 @@ class NodeImage(db.Model):
     image_path = db.Column(db.String(500), nullable=False)
     caption = db.Column(db.String(200))
 
+
+def build_tree(nodes, parent_id=None):
+    tree = []
+    for node in nodes:
+        if node.parent_id == parent_id:
+            tree.append({
+                "id": node.id,
+                "name": node.name,
+                "images": [
+                    {"path": img.image_path, "caption": img.caption}
+                    for img in node.images
+                ],
+                "children": build_tree(nodes, node.id)
+            })
+    return tree
