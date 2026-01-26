@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animal Kingdom</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        .node {
+            cursor: pointer;
+            color: #0645AD;
+        }
+
+            .node:hover {
+                text-decoration: underline;
+            }
+
+        .images img {
+            max-width: 200px;
+            display: block;
+            margin: 5px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Animal Kingdom</h1>
+
+    <div id="tree"></div>
+
+    <script>
+    const treeData = {{ tree | tojson }};
+
+    function createNode(node) {
+        const li = document.createElement("li");
+
+        const label = document.createElement("span");
+        label.textContent = node.name;
+        label.className = "node";
+        li.appendChild(label);
+
+        const childrenContainer = document.createElement("ul");
+        childrenContainer.classList.add("hidden");
+
+        // Images (leaf nodes only)
+        if (node.images.length > 0) {
+            const imagesDiv = document.createElement("div");
+            imagesDiv.className = "images hidden";
+
+            node.images.forEach(img => {
+                const image = document.createElement("img");
+                image.src = img.path;
+                image.alt = img.caption || node.name;
+                imagesDiv.appendChild(image);
+            });
+
+            li.appendChild(imagesDiv);
+
+            label.onclick = () => {
+                imagesDiv.classList.toggle("hidden");
+            };
+
+            return li;
+        }
+
+        // Children
+        node.children.forEach(child => {
+            childrenContainer.appendChild(createNode(child));
+        });
+
+        li.appendChild(childrenContainer);
+
+        label.onclick = () => {
+            childrenContainer.classList.toggle("hidden");
+        };
+
+        return li;
+    }
+
+    function renderTree(data) {
+        const ul = document.createElement("ul");
+        data.forEach(node => ul.appendChild(createNode(node)));
+        return ul;
+    }
+
+    document.getElementById("tree").appendChild(renderTree(treeData));
+    </script>
+
+</body>
+</html>
