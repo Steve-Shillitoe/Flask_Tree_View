@@ -76,6 +76,39 @@ This project uses Flask’s **app factory pattern**, with ```create_app()``` in 
 
 For development and IDE-based workflows, a small launcher script may be used to import and invoke create_app(). In production, IIS loads the application via a WSGI entry point that references the app returned by the factory, ensuring a single, consistent application instance across environments.
 
+```
+Flask CLI        → calls create_app()
+Visual Studio    → imports create_app()
+IIS / wfastcgi   → imports create_app()
+```
+## Running the Web App
+### Running the App Locally (Flask CLI)
+
+To run the application in a development environment using the Flask CLI:
+
+#### 1.Activate your virtual environment:
+```
+cd C:\path\to\Flask_Tree_View
+.\venv\Scripts\Activate.ps1
+```
+Set the Flask app environment variable:
+```
+$env:FLASK_APP="AnimalKingdom:create_app"
+$env:FLASK_ENV="development"  # optional, enables debug mode
+```
+#### 2.Run the development server:
+```
+python -m flask run
+```
+Open the browser:
+```
+http://127.0.0.1:5000
+```
+#### Notes:
+The development server automatically reloads on code changes when ```FLASK_ENV=development```.
+
+Do not use app.run() manually when running with the Flask CLI — the CLI manages the server lifecycle.
+
 ## Database setup
 CREATE DATABASE AnimalKingdom;
 ### Database Migration Instructions (Flask + SQLAlchemy + Flask-Migrate)
