@@ -1,5 +1,35 @@
 # Flask Tree View - A Hierarchical Image Explorer
 ## AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
+## Animal Kingdom Flask App
+
+### Description:
+Interactive Flask web application demonstrating hierarchical data visualization with a MS SQL Server backend. Implements a dynamic tree view of the animal kingdom, where users can expand/collapse nodes and view images of leaf nodes in a modal popup. Built using best practices in Flask app structure, SQLAlchemy ORM, Flask-Migrate, and Jinja2 templating.
+
+### Key Features:
+
+**Hierarchical data modeling**: Uses SQLAlchemy to represent parent-child relationships in the animal kingdom.
+
+**Dynamic tree view**: Expand/collapse nodes interactively with JavaScript.
+
+**Image modal**: Clickable leaf node images open in a responsive modal popup.
+
+**Database migrations**: Managed with Flask-Migrate and Alembic.
+
+**Clean architecture**: App factory pattern and Blueprints for modularity.
+
+**Front-end integration**: HTML, CSS, and JavaScript seamlessly connected to Flask backend.
+
+### Tech Stack:
+
+**Backend**: Python, Flask, Flask-SQLAlchemy, Flask-Migrate
+
+**Database**: MS SQL Server
+
+**Frontend**: HTML, CSS, JavaScript (Vanilla)
+
+### Use Case / Portfolio Impact:
+Demonstrates full-stack development skills, clean code structure, database modeling, and interactive front-end development. Ideal for showcasing **Flask development capabilities** to potential employers.
+
 **AnimalKingdom** is a Flask-based web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in Microsoft SQL Server and displays it as an interactive, expandable tree view, with images attached to leaf nodes.
 
 The project uses Flask’s **app factory pattern** and **Blueprints** to keep configuration, routing, and domain logic clearly separated. Database access is handled via **Flask-SQLAlchemy**, with schema evolution managed using **Flask-Migrate**. The hierarchical domain model maps naturally to the UI, allowing users to progressively explore the data by expanding and collapsing branches of the tree.
