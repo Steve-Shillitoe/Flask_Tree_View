@@ -1,4 +1,54 @@
 # Flask Tree View - A Hierarchical Image Explorer
+## Architecture Overview
+
+This Flask web application uses the **app factory pattern** combined with **Blueprints** to provide a clean, modular, and scalable structure. The application is created dynamically via a ```create_app()``` function, which is responsible for configuring the app, initialising extensions, importing models, and registering routes. This avoids global state and ensures compatibility with Flask CLI tooling, database migrations, and multiple execution environments (CLI, Visual Studio, WSGI servers).
+
+Routing and view logic are organised using **Blueprints**, allowing request-handling code to remain separate from application setup. This makes the codebase easier to reason about and enables future expansion, such as adding APIs or admin views, without restructuring the core application.
+
+Data persistence is handled using **Flask-SQLAlchemy** with a single shared database instance, initialised within the app factory. The domain model represents a **self-referencing hierarchy** (parent–child relationships), with images attached to leaf nodes. This structure maps naturally to the expandable tree view rendered in the UI.
+
+The user interface is **server-rendered using Jinja templates**, with minimal JavaScript added to provide expand/collapse behaviour. This approach keeps the application simple, accessible, and easy to debug, while still offering an interactive experience.
+```
+Browser
+   │
+   │  HTTP GET /
+   ▼
+Flask Application
+(create_app)
+   │
+   │  Route matched via Blueprint
+   ▼
+View Function (routes.py)
+   │
+   │  Query hierarchy + images
+   ▼
+SQLAlchemy ORM
+   │
+   │  SQL queries
+   ▼
+MS SQL Server
+   │
+   │  Result set
+   ▲
+   │
+SQLAlchemy ORM
+   │
+   │  Python objects
+   ▼
+Tree Builder (models.py)
+   │
+   │  Nested tree structure
+   ▼
+Jinja Template (tree.html)
+   │
+   │  HTML rendered
+   ▼
+Browser
+   │
+   │  Expand / collapse via JavaScript
+
+```
+
 ## Database setup
 CREATE DATABASE AnimalKingdom;
 ### Database Migration Instructions (Flask + SQLAlchemy + Flask-Migrate)
