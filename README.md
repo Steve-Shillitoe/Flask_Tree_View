@@ -393,6 +393,9 @@ GO
 ### Blueprints
 Blueprints allow a Flask application to be split into smaller, well-organised parts. Instead of defining all routes in a single file, related routes are grouped together and registered with the application when it starts. This makes the code easier to read, reason about, and extend as the project grows. Blueprints are especially useful when using the app factory pattern, where the Flask app is created dynamically rather than as a global object.
 
+#### Why Blueprints matter in this project
+In this project, Blueprints are used to separate application setup (configuration, database initialisation, and migrations) from request-handling logic. The tree-view UI routes are defined in a Blueprint and registered within the app factory, ensuring they are correctly wired to the shared SQLAlchemy database instance. This structure allows the hierarchy and image-rendering logic to remain cleanly organised, makes future expansion (such as adding a REST API or admin interface) straightforward, and ensures compatibility with Flask CLI commands and Visual Studio’s development server.
+
 ### Unit Testing
 
 The `build_tree` helper function is unit-tested using `pytest`.
@@ -404,6 +407,3 @@ Run tests with:
 ```bash
 pytest
 ```
-
-#### Why Blueprints matter in this project
-In this project, Blueprints are used to separate application setup (configuration, database initialisation, and migrations) from request-handling logic. The tree-view UI routes are defined in a Blueprint and registered within the app factory, ensuring they are correctly wired to the shared SQLAlchemy database instance. This structure allows the hierarchy and image-rendering logic to remain cleanly organised, makes future expansion (such as adding a REST API or admin interface) straightforward, and ensures compatibility with Flask CLI commands and Visual Studio’s development server.
