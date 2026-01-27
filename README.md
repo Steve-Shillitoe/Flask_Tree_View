@@ -1,4 +1,13 @@
 # Flask Tree View - A Hierarchical Image Explorer
+##AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
+**AnimalKingdom** is a Flask-based web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in Microsoft SQL Server and displays it as an interactive, expandable tree view, with images attached to leaf nodes.
+
+The project uses Flask’s **app factory pattern** and **Blueprints** to keep configuration, routing, and domain logic clearly separated. Database access is handled via **Flask-SQLAlchemy**, with schema evolution managed using **Flask-Migrate**. The hierarchical domain model maps naturally to the UI, allowing users to progressively explore the data by expanding and collapsing branches of the tree.
+
+The user interface is rendered server-side using **Jinja templates**, with lightweight JavaScript providing expand/collapse behaviour. This approach keeps client-side complexity low while still delivering an intuitive, interactive experience.
+
+The codebase is structured for maintainability and extensibility, making it straightforward to add new hierarchy levels, additional content types, or future features such as REST APIs or administrative tools.
+
 ## Architecture Overview
 
 This Flask web application uses the **app factory pattern** combined with **Blueprints** to provide a clean, modular, and scalable structure. The application is created dynamically via a ```create_app()``` function, which is responsible for configuring the app, initialising extensions, importing models, and registering routes. This avoids global state and ensures compatibility with Flask CLI tooling, database migrations, and multiple execution environments (CLI, Visual Studio, WSGI servers).
@@ -8,6 +17,17 @@ Routing and view logic are organised using **Blueprints**, allowing request-hand
 Data persistence is handled using **Flask-SQLAlchemy** with a single shared database instance, initialised within the app factory. The domain model represents a **self-referencing hierarchy** (parent–child relationships), with images attached to leaf nodes. This structure maps naturally to the expandable tree view rendered in the UI.
 
 The user interface is **server-rendered using Jinja templates**, with minimal JavaScript added to provide expand/collapse behaviour. This approach keeps the application simple, accessible, and easy to debug, while still offering an interactive experience.
+
+## Architecture Overview (Technical Interview / Portfolio Version)
+This application is built using Flask’s **app factory pattern**, allowing the application instance to be created dynamically with configuration, extensions, and routes initialised in a controlled way. This avoids global state, enables clean dependency initialisation, and ensures compatibility with Flask CLI tooling, database migrations, and multiple deployment environments.
+
+Routing and request handling are organised using **Blueprints**, which encapsulate related view functions independently of the application instance. Blueprints are registered within the app factory, keeping application setup separate from request logic and making the codebase easier to extend with additional features such as APIs or administrative views.
+
+Data access is handled through **Flask-SQLAlchemy**, using a single shared database instance initialised within the factory. The domain model represents hierarchical data using self-referencing relationships, allowing parent–child structures to be queried efficiently. Leaf nodes in the hierarchy are associated with image records, enabling the UI to render both structure and content in a single pass.
+
+The user interface is rendered server-side using **Jinja templates**, producing a fully-formed HTML representation of the hierarchy. Lightweight JavaScript is then used to progressively enhance the UI with expand and collapse behaviour, keeping client-side complexity low while maintaining an interactive experience.
+
+Overall, this architecture prioritises clarity, modularity, and maintainability, while remaining simple to deploy and reason about.
 ```
 Browser
    │
