@@ -109,6 +109,61 @@ The development server automatically reloads on code changes when ```FLASK_ENV=d
 
 Do not use app.run() manually when running with the Flask CLI — the CLI manages the server lifecycle.
 
+## Quick Start
+
+Follow these steps to get the AnimalKingdom web app running locally:
+
+### Clone the repository:
+```
+git clone https://github.com/your-username/AnimalKingdom.git
+cd AnimalKingdom
+```
+### Create and activate a virtual environment:
+```
+python -m venv venv
+.\venv\Scripts\Activate.ps1  # Windows PowerShell
+```
+### Install dependencies:
+```
+pip install -r requirements.txt
+```
+### Set environment variables for Flask:
+```
+$env:FLASK_APP="AnimalKingdom:create_app"
+$env:FLASK_ENV="development"  # enables debug mode
+```
+
+### Initialize the database:
+```
+python -m flask db init       # Only the first time
+python -m flask db migrate -m "Initial migration"
+python -m flask db upgrade
+```
+
+### Seed the database with sample hierarchy and images:
+See **Database setup** section below
+
+### Run the development server:
+```
+python -m flask run
+```
+
+### Open the app in your browser:
+```
+http://127.0.0.1:5000
+```
+### Notes
+
+The Flask CLI automatically detects routes and models via the app factory (create_app()).
+
+Changes to models require a new migration:
+```
+python -m flask db migrate -m "Describe your change"
+python -m flask db upgrade
+```
+
+Leaf-node images are displayed in the tree view. Expand and collapse branches by clicking the links.
+
 ## Database setup
 CREATE DATABASE AnimalKingdom;
 ### Database Migration Instructions (Flask + SQLAlchemy + Flask-Migrate)
