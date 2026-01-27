@@ -2,7 +2,6 @@
    General page styling
 ----------------------------- */
 body {
-    /* Light gray background for the entire page */
     background-color: lightgray;
 }
 
@@ -11,20 +10,20 @@ body {
 ----------------------------- */
 ul {
     list-style-type: none; /* Remove default bullets */
-    padding-left: 20px; /* Indent child lists */
+    padding-left: 20px; /* Indent children */
 }
 
 li {
-    margin: 5px 0; /* Vertical spacing between items */
+    margin: 5px 0; /* Spacing between nodes */
 }
 
 /* -----------------------------
    Node label styling
 ----------------------------- */
 .node {
-    cursor: pointer; /* Indicate clickable */
-    color: #0645AD; /* Blue color like a link */
-    position: relative; /* Needed for icon positioning */
+    cursor: pointer; /* Indicates clickable */
+    color: #0645AD; /* Blue link style */
+    position: relative; /* Needed for icons */
 }
 
     /* Hover effect for nodes */
@@ -36,31 +35,67 @@ li {
    Expand/Collapse icons
 ----------------------------- */
     .node::before {
-        /* Use content property to show + or - icons */
-        content: "+";
+        content: "+"; /* Default collapsed icon */
         display: inline-block;
         width: 1em;
         margin-right: 5px;
         font-weight: bold;
     }
 
-    /* Expanded nodes */
     .node.expanded::before {
-        content: "-"; /* Show minus when expanded */
+        content: "-"; /* Expanded icon */
     }
 
 /* -----------------------------
    Images styling
 ----------------------------- */
 .images img {
-    max-width: 200px; /* Restrict image width */
-    display: block; /* Each image on a separate line */
+    max-width: 200px; /* Thumbnail size */
+    display: block;
     margin: 5px 0;
+    cursor: zoom-in; /* Indicates modal available */
 }
 
 /* -----------------------------
    Hidden elements
 ----------------------------- */
 .hidden {
-    display: none; /* Hide elements (children or images) */
+    display: none; /* Toggle visibility for children/images */
 }
+
+/* -----------------------------
+   Modal styling
+----------------------------- */
+.modal {
+    display: none; /* Hidden initially */
+    position: fixed; /* Full screen overlay */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8); /* Semi-transparent black */
+}
+
+.modal-content {
+    margin: 5% auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80%;
+    box-shadow: 0 0 15px #fff;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover {
+        color: #bbb;
+    }

@@ -2,93 +2,129 @@
 <html>
 <head>
     <title>Animal Kingdom</title>
-    <!-- Link to external CSS for styling the tree and images -->
     <link rel="stylesheet" type="text/css" href="/static/css/site.css" />
 </head>
 <body>
 
     <h1>Animal Kingdom</h1>
 
-    <!-- Container where the tree will be rendered -->
+    <!-- Container for the tree view -->
     <div id="tree"></div>
 
+    <!-- Modal for enlarged images -->
+    <div id="imageModal" class="modal hidden">
+        <span id="closeModal" class="close">&times;</span>
+        <img class="modal-content" id="modalImage" />
+        <div id="caption"></div>
+    </div>
+
     <script>
-            // Tree data passed from Flask backend as a JSON object
-            const treeData = {{ tree | tojson }};
+/**
+ * Tree data passed from Flask backend
+ * @type {Array<Object>}
+ */
+const treeData = {{ tree | tojson }};
+
+/**
+ * Recursively creates a node and its children
+ * Adds expand/collapse functionality and image modal
+ *
+ * @param {Object} node - A node object from treeData
+ * @returns {HTMLElement} - <li> element for this node
+ */
+function createNode(node) {
+    const li = document.createElement("li");
+
+    // Node label
+    const label = document.createElement("span");
+    label.textContent = node.name;
+    label.className = "node"; // collapsed by default
+    li.appendChild(label);
+
+    // Container for child nodes (hidden initially)
+    const childrenContainer = document.createElement("ul");
+    childrenContainer.classList.add("hidden");
+
+    // Leaf nodes with images
+    if (node.images.length > 0) {
+        const imagesDiv = document.createElement("div");
+        imagesDiv.className = "images hidden";
+
+        node.images.forEach(img => {
+            const image = document.createElement("img");
+            image.src = img.path;
+            image.alt = img.caption || node.name;
+            imagesDiv.appendChild(image);
 
             /**
-             * Recursively creates a DOM node for a hierarchy node
-             * @param {Object} node - A single node from the treeData
-             * @returns {HTMLElement} <li> element representing this node and its children
+             * Click handler to open modal with enlarged image
              */
-            function createNode(node) {
-                const li = document.createElement("li");
+            image.onclick = () => {
+                modal.style.display = "block";
+                modalImg.src = image.src;
+                captionText.textContent = image.alt;
+            };
+        });
 
-                // Node label
-                const label = document.createElement("span");
-                label.textContent = node.name;
-                label.className = "node"; // initial state is collapsed
-                li.appendChild(label);
+        li.appendChild(imagesDiv);
 
-                // Container for child nodes (hidden initially)
-                const childrenContainer = document.createElement("ul");
-                childrenContainer.classList.add("hidden");
+        // Clicking the label toggles images for leaf nodes
+        label.onclick = () => {
+            imagesDiv.classList.toggle("hidden");
+            label.classList.toggle("expanded");
+        };
 
-                // Render images if this is a leaf node
-                if (node.images.length > 0) {
-                    const imagesDiv = document.createElement("div");
-                    imagesDiv.className = "images hidden";
+        return li; // leaf node done
+    }
 
-                    // Loop through all images for this node
-                    node.images.forEach(img => {
-                        const image = document.createElement("img");
-                        image.src = img.path;
-                        image.alt = img.caption || node.name;
-                        imagesDiv.appendChild(image);
-                    });
+    // Recursively create children
+    node.children.forEach(child => {
+        childrenContainer.appendChild(createNode(child));
+    });
+    li.appendChild(childrenContainer);
 
-                    li.appendChild(imagesDiv);
+    // Click label to toggle child visibility and icon
+    label.onclick = () => {
+        childrenContainer.classList.toggle("hidden");
+        label.classList.toggle("expanded");
+    };
 
-                    // Clicking leaf node toggles images
-                    label.onclick = () => {
-                        imagesDiv.classList.toggle("hidden");
-                        label.classList.toggle("expanded"); // toggle icon
-                    };
+    return li;
+}
 
-                    // Return early because leaf nodes have no children
-                    return li;
-                }
+/**
+ * Converts tree data to nested <ul> structure
+ * @param {Array} data - Root nodes array
+ * @returns {HTMLElement} <ul> containing full tree
+ */
+function renderTree(data) {
+    const ul = document.createElement("ul");
+    data.forEach(node => ul.appendChild(createNode(node)));
+    return ul;
+}
 
-                // Recursively create child nodes
-                node.children.forEach(child => {
-                    childrenContainer.appendChild(createNode(child));
-                });
+// Append tree to container
+document.getElementById("tree").appendChild(renderTree(treeData));
 
-                // Append the child container to this node
-                li.appendChild(childrenContainer);
+/* -----------------------------
+   Modal functionality
+----------------------------- */
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImage");
+const captionText = document.getElementById("caption");
+const closeBtn = document.getElementById("closeModal");
 
-                // Clicking parent node toggles children visibility and icon
-                label.onclick = () => {
-                    childrenContainer.classList.toggle("hidden");
-                    label.classList.toggle("expanded"); // toggle icon
-                };
+// Close modal on '×' click
+closeBtn.onclick = () => {
+    modal.style.display = "none";
+};
 
-                return li;
-            }
-
-            /**
-             * Converts the tree data into a nested <ul> structure
-             * @param {Array} data - Array of root nodes
-             * @returns {HTMLElement} Root <ul> element containing the full tree
-             */
-            function renderTree(data) {
-                const ul = document.createElement("ul");
-                data.forEach(node => ul.appendChild(createNode(node)));
-                return ul;
-            }
-
-            // Render the full tree into #tree container on page load
-            document.getElementById("tree").appendChild(renderTree(treeData));
+// Optional: close modal when clicking outside the image
+modal.onclick = (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+};
     </script>
 
 </body>
