@@ -1,5 +1,5 @@
 # Flask Tree View - A Hierarchical Image Explorer
-##AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
+## AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
 **AnimalKingdom** is a Flask-based web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in Microsoft SQL Server and displays it as an interactive, expandable tree view, with images attached to leaf nodes.
 
 The project uses Flask’s **app factory pattern** and **Blueprints** to keep configuration, routing, and domain logic clearly separated. Database access is handled via **Flask-SQLAlchemy**, with schema evolution managed using **Flask-Migrate**. The hierarchical domain model maps naturally to the UI, allowing users to progressively explore the data by expanding and collapsing branches of the tree.
