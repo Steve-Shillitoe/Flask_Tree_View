@@ -407,3 +407,15 @@ Run tests with:
 ```bash
 pytest
 ```
+
+### Continuous Integration
+This project uses **GitHub Actions** to automatically run unit tests
+on every push or pull request to `main`.
+
+The workflow:
+1. Sets up Python
+2. Installs dependencies
+3. Runs all `pytest` unit tests
+
+This ensures that tree-building logic and other functionality
+remain stable across changes.
