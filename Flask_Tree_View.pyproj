@@ -27,6 +27,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnimalKingdom\tests\test_build_tree.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AnimalKingdom\tests\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="config.py">
       <SubType>Code</SubType>
     </Compile>
@@ -72,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AnimalKingdom\" />
+    <Folder Include="AnimalKingdom\tests\" />
     <Folder Include="AnimalKingdom\services\" />
     <Folder Include="AnimalKingdom\static\" />
     <Folder Include="AnimalKingdom\static\images\" />

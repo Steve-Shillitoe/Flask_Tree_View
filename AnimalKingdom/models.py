@@ -102,7 +102,7 @@ def build_tree(nodes, parent_id=None):
             - images: List of image dictionaries
             - children: Recursively built child nodes
     """
-
+    
     tree = []
 
     for node in nodes:
