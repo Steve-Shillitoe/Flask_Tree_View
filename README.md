@@ -70,6 +70,11 @@ Browser
    │  Expand / collapse via JavaScript
 
 ```
+## Application Entry Point
+
+This project uses Flask’s **app factory pattern**, with ```create_app()``` in ```AnimalKingdom/__init__.py``` acting as the primary entry point. When run via the Flask CLI or deployed under IIS using wfastcgi, the application is created by calling create_app() and returning a fully configured Flask instance.
+
+For development and IDE-based workflows, a small launcher script may be used to import and invoke create_app(). In production, IIS loads the application via a WSGI entry point that references the app returned by the factory, ensuring a single, consistent application instance across environments.
 
 ## Database setup
 CREATE DATABASE AnimalKingdom;
