@@ -18,6 +18,8 @@ Data persistence is handled using **Flask-SQLAlchemy** with a single shared data
 
 The user interface is **server-rendered using Jinja templates**, with minimal JavaScript added to provide expand/collapse behaviour. This approach keeps the application simple, accessible, and easy to debug, while still offering an interactive experience.
 
+The application uses Flask’s app factory pattern, with create_app() in AnimalKingdom/__init__.py acting as the primary entry point, while run.py is provided as a development launcher for IDE-based workflows.
+
 ## Architecture Overview (Technical Interview / Portfolio Version)
 This application is built using Flask’s **app factory pattern**, allowing the application instance to be created dynamically with configuration, extensions, and routes initialised in a controlled way. This avoids global state, enables clean dependency initialisation, and ensures compatibility with Flask CLI tooling, database migrations, and multiple deployment environments.
 
