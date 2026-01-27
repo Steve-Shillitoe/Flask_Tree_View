@@ -1,31 +1,58 @@
+/* -----------------------------
+   General page styling
+----------------------------- */
 body {
-    background-color:  lightgray;
+    /* Light gray background for the entire page */
+    background-color: lightgray;
 }
 
+/* -----------------------------
+   Tree list styling
+----------------------------- */
 ul {
+    /* Remove default bullets from <ul> lists */
     list-style-type: none;
+    /* Indent child lists for hierarchy visualization */
     padding-left: 20px;
 }
 
 li {
+    /* Add vertical spacing between list items */
     margin: 5px 0;
 }
 
+/* -----------------------------
+   Node label styling
+----------------------------- */
 .node {
+    /* Show pointer cursor to indicate clickable elements */
     cursor: pointer;
+    /* Blue color for the text, typical link style */
     color: #0645AD;
 }
 
+    /* Hover effect for node labels */
     .node:hover {
+        /* Underline text on hover for visual feedback */
         text-decoration: underline;
     }
 
+/* -----------------------------
+   Images styling
+----------------------------- */
 .images img {
+    /* Maximum width for images to prevent layout break */
     max-width: 200px;
+    /* Display each image on its own line */
     display: block;
+    /* Add vertical spacing around each image */
     margin: 5px 0;
 }
 
+/* -----------------------------
+   Hidden elements
+----------------------------- */
 .hidden {
+    /* Used to hide elements (child nodes or images) initially */
     display: none;
 }
