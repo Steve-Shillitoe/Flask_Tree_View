@@ -2,56 +2,72 @@
 <html>
 <head>
     <title>Animal Kingdom</title>
+    <!-- Link to external CSS for styling the tree and images -->
     <link rel="stylesheet" type="text/css" href="/static/css/site.css" />
 </head>
 <body>
 
+    <!-- Page heading -->
     <h1>Animal Kingdom</h1>
 
+    <!-- Container where the tree will be rendered -->
     <div id="tree"></div>
 
     <script>
+    // Tree data passed from Flask backend as a JSON object
     const treeData = {{ tree | tojson }};
 
+    /**
+     * Recursively creates a DOM node for a hierarchy node
+     * @param {Object} node - A single node from the treeData
+     * @returns {HTMLElement} <li> element representing this node and its children
+     */
     function createNode(node) {
         const li = document.createElement("li");
 
+        // Label element displaying the node's name
         const label = document.createElement("span");
         label.textContent = node.name;
         label.className = "node";
         li.appendChild(label);
 
+        // Container for child nodes (hidden by default)
         const childrenContainer = document.createElement("ul");
         childrenContainer.classList.add("hidden");
 
-        // Images (leaf nodes only)
+        // Render images if this is a leaf node
         if (node.images.length > 0) {
             const imagesDiv = document.createElement("div");
-            imagesDiv.className = "images hidden";
+            imagesDiv.className = "images hidden"; // hidden initially
 
+            // Loop through all images for this node
             node.images.forEach(img => {
                 const image = document.createElement("img");
                 image.src = img.path;
-                image.alt = img.caption || node.name;
+                image.alt = img.caption || node.name; // Fallback alt text
                 imagesDiv.appendChild(image);
             });
 
             li.appendChild(imagesDiv);
 
+            // Clicking the label toggles visibility of images
             label.onclick = () => {
                 imagesDiv.classList.toggle("hidden");
             };
 
+            // Return early because leaf nodes have no children
             return li;
         }
 
-        // Children
+        // Recursively create child nodes
         node.children.forEach(child => {
             childrenContainer.appendChild(createNode(child));
         });
 
+        // Append the child container to this node
         li.appendChild(childrenContainer);
 
+        // Clicking the label toggles visibility of child nodes
         label.onclick = () => {
             childrenContainer.classList.toggle("hidden");
         };
@@ -59,12 +75,18 @@
         return li;
     }
 
+    /**
+     * Converts the tree data into a nested <ul> structure
+     * @param {Array} data - Array of root nodes
+     * @returns {HTMLElement} Root <ul> element containing the full tree
+     */
     function renderTree(data) {
         const ul = document.createElement("ul");
         data.forEach(node => ul.appendChild(createNode(node)));
         return ul;
     }
 
+    // Render the tree into the #tree container on page load
     document.getElementById("tree").appendChild(renderTree(treeData));
     </script>
 
