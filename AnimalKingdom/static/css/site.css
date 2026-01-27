@@ -10,42 +10,51 @@ body {
    Tree list styling
 ----------------------------- */
 ul {
-    /* Remove default bullets from <ul> lists */
-    list-style-type: none;
-    /* Indent child lists for hierarchy visualization */
-    padding-left: 20px;
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 20px; /* Indent child lists */
 }
 
 li {
-    /* Add vertical spacing between list items */
-    margin: 5px 0;
+    margin: 5px 0; /* Vertical spacing between items */
 }
 
 /* -----------------------------
    Node label styling
 ----------------------------- */
 .node {
-    /* Show pointer cursor to indicate clickable elements */
-    cursor: pointer;
-    /* Blue color for the text, typical link style */
-    color: #0645AD;
+    cursor: pointer; /* Indicate clickable */
+    color: #0645AD; /* Blue color like a link */
+    position: relative; /* Needed for icon positioning */
 }
 
-    /* Hover effect for node labels */
+    /* Hover effect for nodes */
     .node:hover {
-        /* Underline text on hover for visual feedback */
         text-decoration: underline;
+    }
+
+    /* -----------------------------
+   Expand/Collapse icons
+----------------------------- */
+    .node::before {
+        /* Use content property to show + or - icons */
+        content: "+";
+        display: inline-block;
+        width: 1em;
+        margin-right: 5px;
+        font-weight: bold;
+    }
+
+    /* Expanded nodes */
+    .node.expanded::before {
+        content: "-"; /* Show minus when expanded */
     }
 
 /* -----------------------------
    Images styling
 ----------------------------- */
 .images img {
-    /* Maximum width for images to prevent layout break */
-    max-width: 200px;
-    /* Display each image on its own line */
-    display: block;
-    /* Add vertical spacing around each image */
+    max-width: 200px; /* Restrict image width */
+    display: block; /* Each image on a separate line */
     margin: 5px 0;
 }
 
@@ -53,6 +62,5 @@ li {
    Hidden elements
 ----------------------------- */
 .hidden {
-    /* Used to hide elements (child nodes or images) initially */
-    display: none;
+    display: none; /* Hide elements (children or images) */
 }

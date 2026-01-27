@@ -43,4 +43,5 @@ def index():
     tree = build_tree(nodes)
 
     # Render the tree view template
+    # Tree view data passed to template in JSON format in variable tree
     return render_template("tree.html", tree=tree)
