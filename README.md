@@ -1,7 +1,8 @@
 ![CI](https://github.com/Steve-Shillitoe/Flask_Tree_View/actions/workflows/python_app.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.14%2B-blue)
 ![Flask](https://img.shields.io/badge/Flask-2.x-black)
-![AnimalKingdom tree view]
+![AnimalKingdom tree view]<img width="269" height="408" alt="image" src="https://github.com/user-attachments/assets/ea97fe82-7844-44e5-9a14-5baced454705" />
+
 # AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
 
 ## Description
