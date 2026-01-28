@@ -27,6 +27,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnimalKingdom\docs\conf.py" />
     <Compile Include="AnimalKingdom\tests\test_build_tree.py">
       <SubType>Code</SubType>
     </Compile>
@@ -50,6 +51,34 @@
     <Compile Include="run.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AnimalKingdom\docs\index.rst" />
+    <Content Include="AnimalKingdom\docs\make.bat" />
+    <Content Include="AnimalKingdom\docs\Makefile" />
+    <Content Include="AnimalKingdom\docs\modules.rst" />
+    <Content Include="AnimalKingdom\docs\_build\html\.buildinfo" />
+    <Content Include="AnimalKingdom\docs\_build\html\.doctrees\environment.pickle" />
+    <Content Include="AnimalKingdom\docs\_build\html\.doctrees\index.doctree" />
+    <Content Include="AnimalKingdom\docs\_build\html\genindex.html" />
+    <Content Include="AnimalKingdom\docs\_build\html\index.html" />
+    <Content Include="AnimalKingdom\docs\_build\html\objects.inv" />
+    <Content Include="AnimalKingdom\docs\_build\html\search.html" />
+    <Content Include="AnimalKingdom\docs\_build\html\searchindex.js" />
+    <Content Include="AnimalKingdom\docs\_build\html\_sources\index.rst.txt" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\alabaster.css" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\base-stemmer.js" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\basic.css" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\custom.css" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\doctools.js" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\documentation_options.js" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\english-stemmer.js" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\file.png" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\github-banner.svg" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\language_data.js" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\minus.png" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\plus.png" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\pygments.css" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\searchtools.js" />
+    <Content Include="AnimalKingdom\docs\_build\html\_static\sphinx_highlight.js" />
     <Content Include="AnimalKingdom\static\css\site.css" />
     <Content Include="AnimalKingdom\static\images\canines\fox.jpg" />
     <Content Include="AnimalKingdom\static\images\felines\cat.jpg" />
@@ -78,6 +107,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AnimalKingdom\" />
+    <Folder Include="AnimalKingdom\docs\" />
+    <Folder Include="AnimalKingdom\docs\_build\" />
+    <Folder Include="AnimalKingdom\docs\_build\html\" />
+    <Folder Include="AnimalKingdom\docs\_build\html\.doctrees\" />
+    <Folder Include="AnimalKingdom\docs\_build\html\_sources\" />
+    <Folder Include="AnimalKingdom\docs\_build\html\_static\" />
+    <Folder Include="AnimalKingdom\docs\_static\" />
+    <Folder Include="AnimalKingdom\docs\_templates\" />
     <Folder Include="AnimalKingdom\tests\" />
     <Folder Include="AnimalKingdom\services\" />
     <Folder Include="AnimalKingdom\static\" />
