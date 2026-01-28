@@ -103,131 +103,13 @@ IIS / wfastcgi   → imports create_app()
 ## Installing AnimalKingdom
 Follow these steps to get the AnimalKingdom web app running locally:
 
-### Clone the repository:
-```
-git clone https://github.com/Steve-Shillitoe/Flask_Tree_View/
-cd AnimalKingdom
-```
-### Create and activate a virtual environment:
-In Windows PowerShell issue these commands,
-```
-python -m venv venv
-.\venv\Scripts\Activate.ps1 
-```
-### Install dependencies:
-```
-pip install -r requirements.txt
-```
-### Set environment variables for Flask:
-```
-$env:FLASK_APP="AnimalKingdom:create_app"
-$env:FLASK_ENV="development"  # enables debug mode
-```
-### Create the Microsoft SQL Server database
+### Set up the database.
+#### Create the Microsoft SQL Server database
 In Microsoft SQL Server Management Studio, open a query window and execute the following command.
 ```
 CREATE DATABASE AnimalKingdom;
 ```
-### Initialize the database:
-```
-python -m flask db init       # Only the first time
-python -m flask db migrate -m "Initial migration"
-python -m flask db upgrade
-```
-
-### Seed the database with sample hierarchy and images:
-See **Database setup** section below
-
-### Run the development server:
-```
-python -m flask run
-```
-
-### Open the app in your browser:
-```
-http://127.0.0.1:5000
-```
-### Notes
-
-The Flask CLI automatically detects routes and models via the app factory (create_app()).
-
-Changes to models require a new migration:
-```
-python -m flask db migrate -m "Describe your change"
-python -m flask db upgrade
-```
-
-## Database setup
-### Database Migration Instructions (Flask + SQLAlchemy + Flask-Migrate)
-#### 1️⃣ Setup
-
-Before performing any migration:
-
-Make sure your virtual environment is activated:
-```
-.\venv\Scripts\activate
-```
-Make sure your FLASK_APP environment variable points to your app factory:
-```
-$env:FLASK_APP="AnimalKingdom:create_app"
-$env:FLASK_ENV="development"  # optional for debugging
-```
-#### 2️⃣ Initial Migration (First Time Only)
-
-If this is the first time setting up the database:
-
-Initialize Alembic migrations:
-```
-flask db init
-```
-This creates a migrations/ folder and alembic.ini.
-
-No need to edit alembic.ini — Flask-Migrate will use your SQLALCHEMY_DATABASE_URI from config.py.
-
-Generate the initial migration script:
-```
-flask db migrate -m "Initial schema"
-```
-Apply the migration to the database:
-```
-flask db upgrade
-```
-#### 3️⃣ Updating the Database After Modifying Models
-
-Whenever you change or add tables/columns in models.py:
-
-Generate a new migration:
-```
-flask db migrate -m "Descriptive message about changes"
-```
-Example:
-```
-flask db migrate -m "Add description field to NodeImage"
-```
-Apply the migration to the database:
-```
-flask db upgrade
-```
-Verify changes in SQL Server using SSMS or a query like:
-```
-SELECT COLUMN_NAME, TABLE_NAME
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_NAME IN ('HierarchyNode', 'NodeImage');
-```
-#### 4️⃣ Rolling Back a Migration (Optional)
-
-If a migration introduces errors, you can downgrade:
-
-List the current revision:
-```
-flask db current
-```
-Downgrade to the previous revision:
-```
-flask db downgrade
-```
-⚠️ Only do this carefully, especially in production. Data in dropped columns/tables will be lost.
-
+#### Populate the database
 The data seeded into the database has the following structure.
 ```
 Animals
@@ -247,6 +129,7 @@ Animals
 └── Amphibians
 
 ```
+In Microsoft SQL Server Management Studio, paste this script into another query window and run it.
 ```
 USE AnimalKingdom;
 GO
@@ -382,6 +265,51 @@ VALUES
 (@WeaselId,  '/static/images/mustelids/weasel.jpg',  'Least Weasel');
 GO
 
+```
+### Clone the repository:
+```
+git clone https://github.com/Steve-Shillitoe/Flask_Tree_View/
+cd AnimalKingdom
+```
+### Create and activate a virtual environment:
+In Windows PowerShell issue these commands,
+```
+python -m venv venv
+.\venv\Scripts\Activate.ps1 
+```
+### Install dependencies:
+```
+pip install -r requirements.txt
+```
+### Set environment variables for Flask:
+```
+$env:FLASK_APP="AnimalKingdom:create_app"
+$env:FLASK_ENV="development"  # enables debug mode
+```
+### Initialize the database:
+```
+python -m flask db init       # Only the first time
+python -m flask db migrate -m "Initial migration"
+python -m flask db upgrade
+```
+
+### Run the development server:
+```
+python -m flask run
+```
+
+### Open the app in your browser:
+```
+http://127.0.0.1:5000
+```
+### Notes
+
+The Flask CLI automatically detects routes and models via the app factory (create_app()).
+
+Changes to models require a new migration:
+```
+python -m flask db migrate -m "Describe your change"
+python -m flask db upgrade
 ```
 
 ### Unit Testing
