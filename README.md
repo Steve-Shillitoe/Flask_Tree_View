@@ -103,7 +103,7 @@ IIS / wfastcgi   → imports create_app()
 ## Installing AnimalKingdom
 Follow these steps to get the AnimalKingdom web app running locally:
 
-With Python 3.14 installed, in Windows PowerShell issue the following commands:
+On a machine with Python 3.14 installed, in Windows PowerShell issue the following commands:
 ### Clone the repository:
 ```
 git clone https://github.com/Steve-Shillitoe/Flask_Tree_View/
