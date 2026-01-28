@@ -1,60 +1,55 @@
 # AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
 
-## Description:
-**AnimalKingdom** is an interactive Flask web application demonstrating hierarchical data visualization with a MS SQL Server backend. It implements a dynamic tree view of the animal kingdom, where users can expand/collapse nodes and view images at leaf nodes in a modal popup. Built using best practices in Flask app structure, SQLAlchemy ORM, Flask-Migrate, and Jinja2 templating.
+## Description
 
-**AnimalKingdom** is a Flask-based web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in Microsoft SQL Server and displays it as an interactive, expandable tree view, with images attached to leaf nodes.
+**AnimalKingdom** is an interactive Flask web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in Microsoft SQL Server and displays it as an expandable tree view, with images attached to leaf nodes and displayed in a modal popup.
 
-**AnimalKingdom** uses Flask’s **app factory pattern** and **Blueprints** to keep configuration, routing, and domain logic clearly separated. Database access is handled via **Flask-SQLAlchemy**, with schema evolution managed using **Flask-Migrate**. The hierarchical domain model maps naturally to the UI, allowing users to progressively explore the data by expanding and collapsing branches of the tree.
+The project follows Flask best practices, using the **app factory pattern** and **Blueprints** to keep configuration, routing, and domain logic clearly separated. Database access is handled via **Flask-SQLAlchemy**, with schema evolution managed using **Flask-Migrate**. The UI is rendered server-side using **Jinja templates**, with lightweight JavaScript providing expand/collapse behaviour and modal image viewing.
 
-The user interface is rendered server-side using **Jinja templates**, with lightweight JavaScript providing expand/collapse behaviour. This approach keeps client-side complexity low while still delivering an intuitive, interactive experience.
+The codebase is structured for clarity, maintainability, and extensibility, making it straightforward to add new hierarchy levels, content types, or future features such as REST APIs or administrative tools.
 
-The codebase is structured for maintainability and extensibility, making it straightforward to add new hierarchy levels, additional content types, or future features such as REST APIs or administrative tools.
+### Blueprints
+Blueprints allow a Flask application to be split into smaller, well-organised parts. Instead of defining all routes in a single file, related routes are grouped together and registered with the application when it starts. This makes the code easier to read, reason about, and extend as the project grows. Blueprints are especially useful when using the app factory pattern, where the Flask app is created dynamically rather than as a global object.
 
-## Key Features:
+#### Why Blueprints matter in this project
+In this project, Blueprints are used to separate application setup (configuration, database initialisation, and migrations) from request-handling logic. The tree-view UI routes are defined in a Blueprint and registered within the app factory, ensuring they are correctly wired to the shared SQLAlchemy database instance. This structure allows the hierarchy and image-rendering logic to remain cleanly organised, makes future expansion (such as adding a REST API or admin interface) straightforward, and ensures compatibility with Flask CLI commands and Visual Studio’s development server.
 
-**Hierarchical data modeling**: Uses SQLAlchemy to represent parent-child relationships in the animal kingdom.
+---
 
-**Dynamic tree view**: Expand/collapse nodes interactively with JavaScript.
+## Key Features
 
-**Image modal**: Clickable leaf node images open in a responsive modal popup.
+- **Hierarchical data modelling** using SQLAlchemy self-referencing relationships  
+- **Interactive tree view** with expand/collapse functionality  
+- **Image modal popup** for leaf-node images  
+- **Database migrations** managed with Flask-Migrate and Alembic  
+- **Clean architecture** using the app factory pattern and Blueprints  
+- **Minimal frontend JavaScript**, keeping client-side complexity low  
+- **Unit tests** for tree-building logic  
+- **CI pipeline** using GitHub Actions  
 
-**Database migrations**: Managed with Flask-Migrate and Alembic.
+---
 
-**Clean architecture**: App factory pattern and Blueprints for modularity.
+## Tech Stack
 
-**Front-end integration**: HTML, CSS, and JavaScript seamlessly connected to Flask backend.
+**Backend**: Python, Flask, Flask-SQLAlchemy, Flask-Migrate  
+**Database**: Microsoft SQL Server  
+**Frontend**: HTML, CSS, Vanilla JavaScript  
+**Testing**: pytest  
+**CI**: GitHub Actions  
 
-## Tech Stack:
-
-**Backend**: Python, Flask, Flask-SQLAlchemy, Flask-Migrate
-
-**Database**: MS SQL Server
-
-**Frontend**: HTML, CSS, JavaScript (Vanilla)
+---
 
 ## Architecture Overview
 
-This Flask web application uses the **app factory pattern** combined with **Blueprints** to provide a clean, modular, and scalable structure. The application is created dynamically via a ```create_app()``` function, which is responsible for configuring the app, initialising extensions, importing models, and registering routes. This avoids global state and ensures compatibility with Flask CLI tooling, database migrations, and multiple execution environments (CLI, Visual Studio, WSGI servers).
+This application uses Flask’s **app factory pattern**, with the application instance created dynamically via a `create_app()` function. This approach avoids global state, ensures compatibility with Flask CLI tooling and database migrations, and supports multiple execution environments.
 
-Routing and view logic are organised using **Blueprints**, allowing request-handling code to remain separate from application setup. This makes the codebase easier to reason about and enables future expansion, such as adding APIs or admin views, without restructuring the core application.
+Routing and request handling are organised using **Blueprints**, keeping application setup separate from view logic and enabling future expansion without restructuring the core application.
 
-Data persistence is handled using **Flask-SQLAlchemy** with a single shared database instance, initialised within the app factory. The domain model represents a **self-referencing hierarchy** (parent–child relationships), with images attached to leaf nodes. This structure maps naturally to the expandable tree view rendered in the UI.
+Data persistence is handled using **Flask-SQLAlchemy**, with a domain model representing a **self-referencing hierarchy**. Leaf nodes may be associated with image records, allowing the hierarchy and content to be rendered efficiently in a single pass.
 
-The user interface is **server-rendered using Jinja templates**, with minimal JavaScript added to provide expand/collapse behaviour. This approach keeps the application simple, accessible, and easy to debug, while still offering an interactive experience.
+The UI is **server-rendered using Jinja templates**, with small amounts of JavaScript used to progressively enhance the experience through expand/collapse behaviour and modal image display.
 
-The application uses Flask’s app factory pattern, with create_app() in AnimalKingdom/__init__.py acting as the primary entry point, while run.py is provided as a development launcher for IDE-based workflows.
-
-## Architecture Overview (Technical Interview / Portfolio Version)
-This application is built using Flask’s **app factory pattern**, allowing the application instance to be created dynamically with configuration, extensions, and routes initialised in a controlled way. This avoids global state, enables clean dependency initialisation, and ensures compatibility with Flask CLI tooling, database migrations, and multiple deployment environments.
-
-Routing and request handling are organised using **Blueprints**, which encapsulate related view functions independently of the application instance. Blueprints are registered within the app factory, keeping application setup separate from request logic and making the codebase easier to extend with additional features such as APIs or administrative views.
-
-Data access is handled through **Flask-SQLAlchemy**, using a single shared database instance initialised within the factory. The domain model represents hierarchical data using self-referencing relationships, allowing parent–child structures to be queried efficiently. Leaf nodes in the hierarchy are associated with image records, enabling the UI to render both structure and content in a single pass.
-
-The user interface is rendered server-side using **Jinja templates**, producing a fully-formed HTML representation of the hierarchy. Lightweight JavaScript is then used to progressively enhance the UI with expand and collapse behaviour, keeping client-side complexity low while maintaining an interactive experience.
-
-Overall, this architecture prioritises clarity, modularity, and maintainability, while remaining simple to deploy and reason about.
+## Request Lifecycle
 ```
 Browser
    │
@@ -97,45 +92,15 @@ Browser
 ```
 ## Application Entry Point
 
-This project uses Flask’s **app factory pattern**, with ```create_app()``` in ```AnimalKingdom/__init__.py``` acting as the primary entry point. When run via the Flask CLI or deployed under IIS using wfastcgi, the application is created by calling create_app() and returning a fully configured Flask instance.
-
-For development and IDE-based workflows, a small launcher script may be used to import and invoke create_app(). In production, IIS loads the application via a WSGI entry point that references the app returned by the factory, ensuring a single, consistent application instance across environments.
+The primary entry point is the `create_app()` function in `AnimalKingdom/__init__.py`. This function is used consistently across environments:
 
 ```
 Flask CLI        → calls create_app()
 Visual Studio    → imports create_app()
 IIS / wfastcgi   → imports create_app()
 ```
-## Running the Web App
-### Running the App Locally (Flask CLI)
 
-To run the application in a development environment using the Flask CLI:
-
-#### 1.Activate your virtual environment:
-```
-cd C:\path\to\Flask_Tree_View
-.\venv\Scripts\Activate.ps1
-```
-Set the Flask app environment variable:
-```
-$env:FLASK_APP="AnimalKingdom:create_app"
-$env:FLASK_ENV="development"  # optional, enables debug mode
-```
-#### 2.Run the development server:
-```
-python -m flask run
-```
-Open the browser:
-```
-http://127.0.0.1:5000
-```
-#### Notes:
-The development server automatically reloads on code changes when ```FLASK_ENV=development```.
-
-Do not use app.run() manually when running with the Flask CLI — the CLI manages the server lifecycle.
-
-## Quick Start
-
+## Installing AnimalKingdom
 Follow these steps to get the AnimalKingdom web app running locally:
 
 ### Clone the repository:
@@ -186,8 +151,6 @@ Changes to models require a new migration:
 python -m flask db migrate -m "Describe your change"
 python -m flask db upgrade
 ```
-
-Leaf-node images are displayed in the tree view. Expand and collapse branches by clicking the links.
 
 ## Database setup
 CREATE DATABASE AnimalKingdom;
@@ -261,6 +224,7 @@ flask db downgrade
 ```
 ⚠️ Only do this carefully, especially in production. Data in dropped columns/tables will be lost.
 
+The data seeded into the database has the following structure.
 ```
 Animals
 ├── Mammals
@@ -415,11 +379,6 @@ VALUES
 GO
 
 ```
-### Blueprints
-Blueprints allow a Flask application to be split into smaller, well-organised parts. Instead of defining all routes in a single file, related routes are grouped together and registered with the application when it starts. This makes the code easier to read, reason about, and extend as the project grows. Blueprints are especially useful when using the app factory pattern, where the Flask app is created dynamically rather than as a global object.
-
-#### Why Blueprints matter in this project
-In this project, Blueprints are used to separate application setup (configuration, database initialisation, and migrations) from request-handling logic. The tree-view UI routes are defined in a Blueprint and registered within the app factory, ensuring they are correctly wired to the shared SQLAlchemy database instance. This structure allows the hierarchy and image-rendering logic to remain cleanly organised, makes future expansion (such as adding a REST API or admin interface) straightforward, and ensures compatibility with Flask CLI commands and Visual Studio’s development server.
 
 ### Unit Testing
 
