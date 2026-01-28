@@ -1,7 +1,6 @@
 ![CI](https://github.com/Steve-Shillitoe/Flask_Tree_View/actions/workflows/python_app.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.14%2B-blue)
 ![Flask](https://img.shields.io/badge/Flask-2.x-black)
-![AnimalKingdom tree view]<img width="269" height="408" alt="image" src="https://github.com/user-attachments/assets/ea97fe82-7844-44e5-9a14-5baced454705" />
 
 # AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
 
@@ -9,7 +8,6 @@
 **AnimalKingdom** is a portfolio-focused demonstration of Flask application architecture and relational data modelling. It is an interactive Flask web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in a Microsoft SQL Server database and displays it as an expandable tree view, with images attached to leaf nodes and displayed in a modal popup.
 
 <img width="269" height="408" alt="image" src="https://github.com/user-attachments/assets/f8061d30-204e-4e7f-b9b9-b1dcb5089534" />
-
 
 ---
 
