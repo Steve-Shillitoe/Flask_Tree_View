@@ -98,12 +98,15 @@ IIS / wfastcgi   → imports create_app()
 - Windows Authentication enabled
 
 The database connection string is defined in ```config.py``` in the root of **AnimalKingdom** as
-```SQLALCHEMY_DATABASE_URI = (
+```
+SQLALCHEMY_DATABASE_URI = (
     "mssql+pyodbc://@localhost\\SQLEXPRESS/AnimalKingdom"
     "?driver=ODBC+Driver+17+for+SQL+Server"
     "&trusted_connection=yes"
     "&TrustServerCertificate=yes"
-)```
+)
+```
+
 Update this connection string if your SQL Server instance name differs from the default.
 Follow these steps to get the AnimalKingdom web app running locally:
 
