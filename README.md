@@ -1,15 +1,7 @@
 # AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
 
 ## Description
-
-**AnimalKingdom** is an interactive Flask web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in a Microsoft SQL Server database and displays it as an expandable tree view, with images attached to leaf nodes and displayed in a modal popup.
-
-The project follows Flask best practices, using the **app factory pattern** and **Blueprints** to keep configuration, routing, and domain logic clearly separated. Database access is handled via **Flask-SQLAlchemy**, with schema evolution managed using **Flask-Migrate**. The UI is rendered server-side using **Jinja templates**, with lightweight JavaScript providing expand/collapse behaviour and modal image viewing.
-
-The codebase is structured for clarity, maintainability, and extensibility, making it straightforward to add new hierarchy levels, content types, or future features such as REST APIs or administrative tools.
-
-### Blueprints
-Blueprints allow a Flask application to be split into smaller, well-organised parts. Instead of defining all routes in a single file, related routes are grouped together and registered with the application when it starts. This makes the code easier to read, reason about, and extend as the project grows. Blueprints are especially useful when using the app factory pattern, where the Flask app is created dynamically rather than as a global object.
+**AnimalKingdom** intended as a portfolio demonstration of Flask architecture and relational data modelling. It is an interactive Flask web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in a Microsoft SQL Server database and displays it as an expandable tree view, with images attached to leaf nodes and displayed in a modal popup.
 
 #### Why Blueprints matter in this project
 In this project, Blueprints are used to separate application setup (configuration, database initialisation, and migrations) from request-handling logic. The tree-view UI routes are defined in a Blueprint and registered within the app factory, ensuring they are correctly wired to the shared SQLAlchemy database instance. This structure allows the hierarchy and image-rendering logic to remain cleanly organised, makes future expansion (such as adding a REST API or admin interface) straightforward, and ensures compatibility with Flask CLI commands and Visual Studio’s development server.
@@ -100,10 +92,25 @@ Visual Studio    → imports create_app()
 IIS / wfastcgi   → imports create_app()
 ```
 
-## Installing AnimalKingdom
+## Local Development Setup
+### Prerequisites
+
+- Python 3.14+
+- Microsoft SQL Server (local instance)
+- ODBC Driver 17 for SQL Server
+- Windows Authentication enabled
+
+The database connection string is defined in ```config.py``` in the root of **AnimalKingdom** as
+```SQLALCHEMY_DATABASE_URI = (
+    "mssql+pyodbc://@localhost\\SQLEXPRESS/AnimalKingdom"
+    "?driver=ODBC+Driver+17+for+SQL+Server"
+    "&trusted_connection=yes"
+    "&TrustServerCertificate=yes"
+)```
+Update this connection string if your SQL Server instance name differs from the default.
 Follow these steps to get the AnimalKingdom web app running locally:
 
-On a machine with Python 3.14 installed, in Windows PowerShell issue the following commands:
+In Windows PowerShell issue the following commands:
 ### Clone the repository:
 ```
 git clone https://github.com/Steve-Shillitoe/Flask_Tree_View/
@@ -136,7 +143,7 @@ python -m flask db migrate -m "Initial migration"
 python -m flask db upgrade
 ```
 ### Populate the database
-The data seeded into the database has the following structure.
+The data seeded into the database has the following structure.  This repository contains images of some of the animals in this hierarchy. 
 ```
 Animals
 ├── Mammals
@@ -155,143 +162,10 @@ Animals
 └── Amphibians
 
 ```
-In Microsoft SQL Server Management Studio, paste this script into another query window and run it.
-```
-USE AnimalKingdom;
-GO
+In Microsoft SQL Server Management Studio, paste the SQL script **populate_db.sql** that can be found in the **SQL_Scripts** folder into another query window and run it. 
 
---------------------------------------------------
--- Clear existing data (optional, dev only)
---------------------------------------------------
-DELETE FROM NodeImage;
-DELETE FROM HierarchyNode;
-GO
+After running this SQL script, the database tables **NodeImage** and **HierarchyNode** will be populated with data.
 
---------------------------------------------------
--- Level 1: Top-level node
---------------------------------------------------
-DECLARE @AnimalsId INT;
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Animals', NULL);
-
-SET @AnimalsId = SCOPE_IDENTITY();
-
---------------------------------------------------
--- Level 2: Animal categories
---------------------------------------------------
-DECLARE @MammalsId INT;
-DECLARE @ReptilesId INT;
-DECLARE @InsectsId INT;
-DECLARE @AmphibiansId INT;
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Mammals', @AnimalsId);
-SET @MammalsId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Reptiles', @AnimalsId);
-SET @ReptilesId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Insects', @AnimalsId);
-SET @InsectsId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Amphibians', @AnimalsId);
-SET @AmphibiansId = SCOPE_IDENTITY();
-
---------------------------------------------------
--- Level 3: Mammal groups
---------------------------------------------------
-DECLARE @PrimatesId INT;
-DECLARE @CaninesId INT;
-DECLARE @FelinesId INT;
-DECLARE @MustelidsId INT;
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Primates', @MammalsId);
-SET @PrimatesId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Canines', @MammalsId);
-SET @CaninesId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Felines', @MammalsId);
-SET @FelinesId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Mustelids', @MammalsId);
-SET @MustelidsId = SCOPE_IDENTITY();
-
---------------------------------------------------
--- Level 4: Mustelid species (leaf nodes)
---------------------------------------------------
-DECLARE @PolecatId INT;
-DECLARE @FerretId INT;
-DECLARE @BadgerId INT;
-DECLARE @OtterId INT;
-DECLARE @StoatId INT;
-DECLARE @WeaselId INT;
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Polecat', @MustelidsId);
-SET @PolecatId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Ferret', @MustelidsId);
-SET @FerretId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Badger', @MustelidsId);
-SET @BadgerId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Otter', @MustelidsId);
-SET @OtterId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Stoat', @MustelidsId);
-SET @StoatId = SCOPE_IDENTITY();
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Weasel', @MustelidsId);
-SET @WeaselId = SCOPE_IDENTITY();
-
---------------------------------------------------
--- Level 4: Canine species (leaf nodes)
---------------------------------------------------
-DECLARE @FoxId INT;
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Fox', @CaninesId);
-SET @FoxId= SCOPE_IDENTITY();
---------------------------------------------------
--- Level 4: Feline species (leaf nodes)
---------------------------------------------------
-DECLARE @CatId INT;
-
-INSERT INTO HierarchyNode (name, parent_id)
-VALUES ('Cat', @FelinesId);
-SET @CatId= SCOPE_IDENTITY();
-
---------------------------------------------------
--- Attach images to leaf nodes only
---------------------------------------------------
-INSERT INTO NodeImage (node_id, image_path, caption)
-VALUES
-(@FoxId,  '/static/images/canines/fox.jpg',    'Red Fox'),
-(@CatId, '/static/images/felines/cat.jpg', 'Domestic Cat'),
-(@PolecatId, '/static/images/mustelids/polecat.jpg', 'European Polecat'),
-(@FerretId,  '/static/images/mustelids/ferret.jpg',  'Domestic Ferret'),
-(@BadgerId,  '/static/images/mustelids/badger.jpg',  'European Badger'),
-(@OtterId,   '/static/images/mustelids/otter.jpg',   'Eurasian Otter'),
-(@StoatId,   '/static/images/mustelids/stoat.jpg',   'Stoat in Winter Coat'),
-(@WeaselId,  '/static/images/mustelids/weasel.jpg',  'Least Weasel');
-GO
-```
-After running this SQL script, the database tables NodeImage and HierarchyNode will be populated with data.
 ### Run the development server:
 Back in the Windows Powershell, issue this command,
 ```
