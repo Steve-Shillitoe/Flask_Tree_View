@@ -105,13 +105,14 @@ Follow these steps to get the AnimalKingdom web app running locally:
 
 ### Clone the repository:
 ```
-git clone https://github.com/your-username/AnimalKingdom.git
+git clone https://github.com/Steve-Shillitoe/Flask_Tree_View/
 cd AnimalKingdom
 ```
 ### Create and activate a virtual environment:
+In Windows PowerShell issue these commands,
 ```
 python -m venv venv
-.\venv\Scripts\Activate.ps1  # Windows PowerShell
+.\venv\Scripts\Activate.ps1 
 ```
 ### Install dependencies:
 ```
@@ -122,7 +123,11 @@ pip install -r requirements.txt
 $env:FLASK_APP="AnimalKingdom:create_app"
 $env:FLASK_ENV="development"  # enables debug mode
 ```
-
+### Create the Microsoft SQL Server database
+In Microsoft SQL Server Management Studio, open a query window and execute the following command.
+```
+CREATE DATABASE AnimalKingdom;
+```
 ### Initialize the database:
 ```
 python -m flask db init       # Only the first time
@@ -153,7 +158,6 @@ python -m flask db upgrade
 ```
 
 ## Database setup
-CREATE DATABASE AnimalKingdom;
 ### Database Migration Instructions (Flask + SQLAlchemy + Flask-Migrate)
 #### 1️⃣ Setup
 
