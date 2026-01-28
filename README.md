@@ -2,7 +2,7 @@
 
 ## Description
 
-**AnimalKingdom** is an interactive Flask web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in Microsoft SQL Server and displays it as an expandable tree view, with images attached to leaf nodes and displayed in a modal popup.
+**AnimalKingdom** is an interactive Flask web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in a Microsoft SQL Server database and displays it as an expandable tree view, with images attached to leaf nodes and displayed in a modal popup.
 
 The project follows Flask best practices, using the **app factory pattern** and **Blueprints** to keep configuration, routing, and domain logic clearly separated. Database access is handled via **Flask-SQLAlchemy**, with schema evolution managed using **Flask-Migrate**. The UI is rendered server-side using **Jinja templates**, with lightweight JavaScript providing expand/collapse behaviour and modal image viewing.
 
