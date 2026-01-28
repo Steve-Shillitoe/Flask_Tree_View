@@ -1,3 +1,7 @@
+![CI](https://github.com/Steve-Shillitoe/Flask_Tree_View/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.14%2B-blue)
+![Flask](https://img.shields.io/badge/Flask-2.x-black)
+
 # AnimalKingdom – Hierarchical Tree View with Flask and SQL Server
 
 ## Description
@@ -108,6 +112,8 @@ SQLALCHEMY_DATABASE_URI = (
 ```
 
 Update this connection string if your SQL Server instance name differs from the default.
+
+### Installation
 Follow these steps to get the AnimalKingdom web app running locally:
 
 In Windows PowerShell issue the following commands:
@@ -135,7 +141,7 @@ In Microsoft SQL Server Management Studio, open a query window and execute the f
 ```
 CREATE DATABASE AnimalKingdom;
 ```
-### Initialize the database:
+### Initialise the database:
 Back in the Windows Powershell issue these commands:
 ```
 python -m flask db init       # Only the first time
