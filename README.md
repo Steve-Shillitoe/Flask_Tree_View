@@ -103,13 +103,13 @@ IIS / wfastcgi   → imports create_app()
 ## Installing AnimalKingdom
 Follow these steps to get the AnimalKingdom web app running locally:
 
+With Python 3.14 installed, in Windows PowerShell issue the following commands:
 ### Clone the repository:
 ```
 git clone https://github.com/Steve-Shillitoe/Flask_Tree_View/
 cd AnimalKingdom
 ```
 ### Create and activate a virtual environment:
-In Windows PowerShell issue these commands,
 ```
 python -m venv venv
 .\venv\Scripts\Activate.ps1 
@@ -129,6 +129,7 @@ In Microsoft SQL Server Management Studio, open a query window and execute the f
 CREATE DATABASE AnimalKingdom;
 ```
 ### Initialize the database:
+Back in the Windows Powershell issue these commands:
 ```
 python -m flask db init       # Only the first time
 python -m flask db migrate -m "Initial migration"
@@ -292,10 +293,10 @@ GO
 ```
 After running this SQL script, the database tables NodeImage and HierarchyNode will be populated with data.
 ### Run the development server:
+Back in the Windows Powershell, issue this command,
 ```
 python -m flask run
 ```
-
 ### Open the app in your browser:
 ```
 http://127.0.0.1:5000
