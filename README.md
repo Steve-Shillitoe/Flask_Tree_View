@@ -8,7 +8,7 @@
 **AnimalKingdom** is a portfolio-focused demonstration of Flask application architecture and relational data modelling. It is an interactive Flask web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in a Microsoft SQL Server database and displays it as an expandable tree view, with images attached to leaf nodes and displayed in a modal popup.
 
 <img width="269" height="408" alt="image" src="https://github.com/user-attachments/assets/f8061d30-204e-4e7f-b9b9-b1dcb5089534" />
-![AnimalKingdom Demo](Demo/demo.gif)
+![AnimalKingdom Demo](Demo/TreeViewDemo.gif)
 
 ---
 
