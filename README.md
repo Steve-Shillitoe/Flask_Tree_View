@@ -44,6 +44,9 @@ Data persistence is handled using **Flask-SQLAlchemy**, with a domain model repr
 
 The UI is **server-rendered using Jinja templates**, with small amounts of JavaScript used to progressively enhance the experience through expand/collapse behaviour and modal image display.
 
+### Eager Loading
+This project uses SQLAlchemy’s eager loading to efficiently retrieve hierarchical nodes and their associated images in a minimal number of database queries. Instead of triggering multiple lazy queries while traversing the tree structure (the N+1 query problem), related data is loaded upfront in a single, optimised query. This significantly improves performance, ensures predictable query behaviour, and makes server-side tree construction fast and scalable as the hierarchy grows.
+
 ## Request Lifecycle
 ```
 Browser
