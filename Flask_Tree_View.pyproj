@@ -17,6 +17,7 @@
     <Name>Flask_Tree_View</Name>
     <RootNamespace>Flask_Tree_View</RootNamespace>
     <InterpreterId>MSBuild|venv|$(MSBuildProjectFullPath)</InterpreterId>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,6 +86,7 @@
     <Content Include="AnimalKingdom\static\images\mustelids\ferret.jpg" />
     <Content Include="AnimalKingdom\static\images\mustelids\polecat.jpg" />
     <Content Include="AnimalKingdom\templates\tree.html" />
+    <Content Include="Demo\TreeViewDemo.gif" />
     <Content Include="migrations\alembic.ini" />
     <Content Include="migrations\README" />
     <Content Include="migrations\script.py.mako" />
@@ -116,7 +118,6 @@
     <Folder Include="AnimalKingdom\docs\_static\" />
     <Folder Include="AnimalKingdom\docs\_templates\" />
     <Folder Include="AnimalKingdom\tests\" />
-    <Folder Include="AnimalKingdom\services\" />
     <Folder Include="AnimalKingdom\static\" />
     <Folder Include="AnimalKingdom\static\images\" />
     <Folder Include="AnimalKingdom\static\images\canines\" />
@@ -128,6 +129,7 @@
     <Folder Include="migrations\versions\" />
     <Folder Include="migrations\versions\__pycache__\" />
     <Folder Include="migrations\__pycache__\" />
+    <Folder Include="Demo\" />
     <Folder Include="SQL_Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />

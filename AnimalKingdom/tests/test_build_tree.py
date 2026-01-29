@@ -98,5 +98,6 @@ def test_build_tree_leaf_node_with_images():
     assert otter["name"] == "Ferret"
     assert len(otter["images"]) == 1
     assert otter["images"][0]["path"] == "/images/mustelids/ferret.jpg"
-    assert otter["images"][0]["caption"] == "European Otter"
+    assert otter["images"][0]["caption"] == "Ferret"
 
+    
