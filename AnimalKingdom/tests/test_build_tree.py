@@ -61,7 +61,7 @@ def test_build_tree_deep_hierarchy():
         MockNode(1, "Animals"),
         MockNode(2, "Mammals", parent_id=1),
         MockNode(3, "Mustelids", parent_id=2),
-        MockNode(4, "European Polecat", parent_id=3),
+        MockNode(4, "Polecat", parent_id=3),
     ]
 
     tree = build_tree(nodes)
