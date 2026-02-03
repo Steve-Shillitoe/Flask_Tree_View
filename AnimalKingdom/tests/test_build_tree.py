@@ -61,7 +61,7 @@ def test_build_tree_deep_hierarchy():
         MockNode(1, "Animals"),
         MockNode(2, "Mammals", parent_id=1),
         MockNode(3, "Mustelids", parent_id=2),
-        MockNode(4, "European Polecat", parent_id=3),
+        MockNode(4, "Polecat", parent_id=3),
     ]
 
     tree = build_tree(nodes)
@@ -98,5 +98,6 @@ def test_build_tree_leaf_node_with_images():
     assert otter["name"] == "Ferret"
     assert len(otter["images"]) == 1
     assert otter["images"][0]["path"] == "/images/mustelids/ferret.jpg"
-    assert otter["images"][0]["caption"] == "European Otter"
+    assert otter["images"][0]["caption"] == "Ferret"
 
+    
