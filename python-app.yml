@@ -1,0 +1,51 @@
+﻿# Name of the GitHub Actions workflow (shown in the Actions tab)
+name: Python CI
+
+# Events that trigger this workflow
+on:
+  # Trigger when code is pushed to main branch
+  push:
+    branches: [ main ]  # Production branch
+
+  # Trigger when a pull request targets main branch
+  pull_request:
+    branches: [ main ]  # Production branch
+
+# Define all jobs in this workflow
+jobs:
+  # Job name (can be anything, used as an identifier)
+  build:
+
+    # Define the OS environment for the runner
+    runs-on: ubuntu-latest  # Microsoft-hosted Linux agent
+
+    # Strategy allows multiple configurations (matrix builds)
+    strategy:
+      matrix:
+        # Python versions to test against (scalable for multi-version testing)
+        python-version: [3.11]
+
+    # Steps define the sequential tasks executed in the job
+    steps:
+
+    # Step 1: Checkout the repository code into the runner
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python environment
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        # Use Python version from the matrix
+        python-version: ${{ matrix.python-version }}
+
+    # Step 3: Install project dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip   # Upgrade pip
+        pip install -r requirements.txt       # Install project dependencies
+
+    # Step 4: Run unit tests using pytest
+    - name: Run unit tests
+      run: |
+        pytest -vv
