@@ -7,7 +7,11 @@
 ## Description
 **AnimalKingdom** is a portfolio-focused demonstration of Flask application architecture and relational data modelling. It is an interactive Flask web application that demonstrates how to model, persist, and render hierarchical data using a clean, modular architecture. The application stores a self-referencing hierarchy in a Microsoft SQL Server database and displays it as an expandable tree view, with images attached to leaf nodes and displayed in a modal popup.
 
-<img width="269" height="408" alt="image" src="https://github.com/user-attachments/assets/f8061d30-204e-4e7f-b9b9-b1dcb5089534" />
+After describing some of the technical features of **AnimalKingdom**, this ReadMe guides the user through setting up this web app for local development.
+
+This animated gif demonstrates how the heirarchical tree view can be navigated to display an image of a particular animal.
+
+![TreeViewDemo](https://github.com/user-attachments/assets/18f4e99c-eaef-4438-9cdd-4f8bcd02484f)
 
 ---
 
@@ -43,6 +47,9 @@ Routing and request handling are organised using **Blueprints**, keeping applica
 Data persistence is handled using **Flask-SQLAlchemy**, with a domain model representing a **self-referencing hierarchy**. Leaf nodes may be associated with image records, allowing the hierarchy and content to be rendered efficiently in a single pass.
 
 The UI is **server-rendered using Jinja templates**, with small amounts of JavaScript used to progressively enhance the experience through expand/collapse behaviour and modal image display.
+
+### Eager Loading
+This project uses SQLAlchemy’s eager loading to efficiently retrieve hierarchical nodes and their associated images in a minimal number of database queries. Instead of triggering multiple lazy queries while traversing the tree structure (the N+1 query problem), related data is loaded upfront in a single, optimised query. This significantly improves performance, ensures predictable query behaviour, and makes server-side tree construction fast and scalable as the hierarchy grows.
 
 ## Request Lifecycle
 ```
