@@ -1,4 +1,3 @@
-
 """
 Application configuration module.
 
@@ -14,12 +13,21 @@ including database connection settings and SQLAlchemy behaviour.
 # - pyodbc as the database driver
 #
 # The database name is "AnimalKingdom".
-SQLALCHEMY_DATABASE_URI = (
+
+import os
+
+SQLALCHEMY_DATABASE_URI = os.environ.get(
+    "SQLALCHEMY_DATABASE_URI",
     "mssql+pyodbc://@localhost\\SQLEXPRESS/AnimalKingdom"
     "?driver=ODBC+Driver+17+for+SQL+Server"
-    "&trusted_connection=yes"
-    "&TrustServerCertificate=yes"
+    "&trusted_connection=yes&TrustServerCertificate=yes"
 )
+# SQLALCHEMY_DATABASE_URI = (
+#     "mssql+pyodbc://@localhost\\SQLEXPRESS/AnimalKingdom"
+#     "?driver=ODBC+Driver+17+for+SQL+Server"
+#     "&trusted_connection=yes"
+#     "&TrustServerCertificate=yes"
+# )
 
 # Disable SQLAlchemy event system for object modification tracking.
 # This reduces memory overhead and is recommended unless explicitly needed.
